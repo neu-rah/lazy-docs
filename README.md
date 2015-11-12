@@ -41,3 +41,9 @@ close file at *url* and quit watching it
 
 ** *note* **
 memory files are not watched for changes
+
+TODO LIST:
+
+- add some assync
+- add more sources (http:,sql:,etc..)
+- optional callback onchange (does OS optimize multi watchers?)
