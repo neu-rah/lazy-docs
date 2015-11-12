@@ -39,8 +39,10 @@ store *srcObject* at memory *url*
 **.close(url)**
 close file at *url* and quit watching it
 
-** *note* **
-memory files are not watched for changes
+** *notes* **
+- memory files are not watched for changes
+- this module does not support multiple methods for the same file
+- docPool can be shared by modules as it does not list contained files or info
 
 TODO LIST:
 
