@@ -40,10 +40,11 @@ function docPool(fromString) {
       if(urls[absFile].needRefresh) {
         debug.log("refreshing file",absFile);
         urls[absFile].watcher.close();
-      } else return urls[absFile];
+      } else return urls[absFile].doc;
     }
-    var tmp=fromString(fs.readFileSync(url));
-    urls[absFile]=tmp;
+    var tmp=urls[absFile]={};
+    tmp.docLoader=src?src:fromString;
+    tmp.doc=tmp.docLoader(fs.readFileSync(url).toString());;
     tmp.needRefresh=false;
     //tmp.needSave=false;
     tmp.fileName=absFile;
@@ -55,8 +56,10 @@ function docPool(fromString) {
         default: console.log("File event",event,absFile);
       }
     });
-    return tmp;
+    return tmp.doc;
   }
 }
 
+var libxml=require('libxmljs');
+var docs=new docPool(function(id){return id;})
 module.exports=function(fromString) {return new docPool(fromString);}
