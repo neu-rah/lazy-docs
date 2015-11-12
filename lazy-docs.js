@@ -59,4 +59,4 @@ function docPool(fromString) {
   }
 }
 
-module.exports=docPool;
+module.exports=function(fromString) {return new docPool(fromString);}
