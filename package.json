@@ -19,5 +19,8 @@
   "repository" :
     { "type" : "git"
     , "url" : "https://github.com/neu-rah/lazy-docs"
-    }
+  },
+  "dependencies" : {
+    "expect":">=1.13.0"
+  }
 }
