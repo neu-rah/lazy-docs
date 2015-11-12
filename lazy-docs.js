@@ -9,8 +9,6 @@ usage:
     //create a pool of libxmljs documents
     docs=require('lazy-docs')(libxml.parseXmlString);
     xmlDoc=docs.open("data/test.xml");
-    // subsequent calls to open (of same file) will return the already opened file
-    // or a realoaded if file changed
 *****/
 var debug=console;
 
