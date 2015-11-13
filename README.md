@@ -42,7 +42,7 @@ close file at *url* and quit watching it
 ** *notes* **
 - memory files are not watched for changes
 - this module does not support multiple methods for the same file
-- docPool can be shared by modules as it does not list contained files or info
+- docPool can be shared by modules as it does not list contained files
 
 TODO LIST:
 

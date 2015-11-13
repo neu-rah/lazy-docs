@@ -20,6 +20,7 @@ if (!String.prototype.startsWith)
 else expect("oks".startsWith("ok")).to.be(true);
 
 function docPool(fromString) {
+  if (!fromString) fromString=function(id) {return id;}
   var urls={};
   this.close=function (url) {
     if (!url) return;
@@ -29,7 +30,8 @@ function docPool(fromString) {
       urls[absFile].watcher.close();
     }
   }
-  this.open=function(url,src) {
+  this.open=function(url,src) {return this.load(url,src).doc;}
+  this.load=function(url,src) {
     if (!url) return;
     if (url.startsWith("mem://"))
       return urls[url]=typeof src==="string"?fromString(src):src;
@@ -40,7 +42,7 @@ function docPool(fromString) {
       if(urls[absFile].needRefresh) {
         debug.log("refreshing file",absFile);
         urls[absFile].watcher.close();
-      } else return urls[absFile].doc;
+      } else return urls[absFile];
     }
     var tmp=urls[absFile]={};
     tmp.docLoader=src?src:fromString;
@@ -48,7 +50,7 @@ function docPool(fromString) {
     tmp.needRefresh=false;
     //tmp.needSave=false;
     tmp.fileName=absFile;
-    tmp.watcher=fs.watch(absFile, function(event, filename){//<---------closure«
+    tmp.watcher=fs.watch(absFile, function(event, filename){
       tmp.needRefresh=true;
       switch(event) {
         case "change": console.log("File changed ",absFile);break;
@@ -56,10 +58,13 @@ function docPool(fromString) {
         default: console.log("File event",event,absFile);
       }
     });
-    return tmp.doc;
+    return tmp;
   }
 }
 
-var libxml=require('libxmljs');
-var docs=new docPool(function(id){return id;})
-module.exports=function(fromString) {return new docPool(fromString);}
+if (module.id="repl") {//debuging with repl inside module [https://github.com/neu-rah/nit]
+  console.log("Debug module lazy-docs loaded into repl env")
+  libxml=require('libxmljs');
+  docs=new docPool();//function(id){return id;})
+} else
+  module.exports=function(fromString) {return new docPool(fromString);}
