@@ -14,6 +14,7 @@ var debug=console;
 
 var expect = require('expect');
 var fs = require('fs');
+var path=require("path");
 
 if (!String.prototype.startsWith)
   String.prototype.startsWith=function (prefix) {return this.slice(0, prefix.length) == prefix;}

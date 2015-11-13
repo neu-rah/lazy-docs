@@ -1,6 +1,6 @@
 {
   "name": "lazy-docs",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Lazy document proxy with watcher",
   "main": "lazy-docs.js",
   "scripts": {
@@ -21,6 +21,7 @@
     , "url" : "https://github.com/neu-rah/lazy-docs"
   },
   "dependencies" : {
-    "expect":">=1.13.0"
+    "expect":">=1.13.0",
+    "path":">=0.12.7"
   }
 }
