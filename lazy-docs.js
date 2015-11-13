@@ -66,5 +66,5 @@ if (module.id="repl") {//debuging with repl inside module [https://github.com/ne
   console.log("Debug module lazy-docs loaded into repl env")
   libxml=require('libxmljs');
   docs=new docPool();//function(id){return id;})
-} else
-  module.exports=function(fromString) {return new docPool(fromString);}
+}
+module.exports=function(fromString) {return new docPool(fromString);}
