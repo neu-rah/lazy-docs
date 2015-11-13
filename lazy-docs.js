@@ -10,7 +10,8 @@ usage:
     docs=require('lazy-docs')(libxml.parseXmlString);
     xmlDoc=docs.open("data/test.xml");
 *****/
-var debug=console;
+var DEBUG=module.id==="repl";
+var debug=DEBUG?console:function(){};
 
 var expect = require('expect');
 var fs = require('fs');
@@ -21,7 +22,10 @@ if (!String.prototype.startsWith)
 else expect("oks".startsWith("ok")).to.be(true);
 
 function docPool(fromString) {
-  if (!fromString) fromString=function(id) {return id;}
+  if (!fromString) {
+    building
+    fromString=function(id) {return id;}
+  }
   var urls={};
   this.close=function (url) {
     if (!url) return;
