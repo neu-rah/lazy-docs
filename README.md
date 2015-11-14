@@ -1,4 +1,5 @@
-####lazy-docs####
+###lazy-docs###
+
 Functional documents for node
 
 functional documents (a function that returns a document) combines watching changes, document parsing and proxy.
