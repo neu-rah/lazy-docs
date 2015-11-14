@@ -1,0 +1,95 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/nodejs', '/usr/bin/npm', 'publish' ]
+2 info using npm@2.14.7
+3 info using node@v4.2.2
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec Result {
+7 silly cache add   raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: '/home/azevedo/code/nodes/lazy-docs',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory /home/azevedo/.npm/lazy-docs/0.1.0/package.tgz not in flight; packing
+9 verbose tar pack [ '/home/azevedo/.npm/lazy-docs/0.1.0/package.tgz',
+9 verbose tar pack   '/home/azevedo/code/nodes/lazy-docs' ]
+10 verbose tarball /home/azevedo/.npm/lazy-docs/0.1.0/package.tgz
+11 verbose folder /home/azevedo/code/nodes/lazy-docs
+12 info prepublish lazy-docs@0.1.0
+13 verbose addLocalTarball adding from inside cache /home/azevedo/.npm/lazy-docs/0.1.0/package.tgz
+14 silly cache afterAdd lazy-docs@0.1.0
+15 verbose afterAdd /home/azevedo/.npm/lazy-docs/0.1.0/package/package.json not in flight; writing
+16 verbose afterAdd /home/azevedo/.npm/lazy-docs/0.1.0/package/package.json written
+17 silly publish { name: 'lazy-docs',
+17 silly publish   version: '0.1.0',
+17 silly publish   description: 'Lazy document proxy with watcher',
+17 silly publish   main: 'lazy-docs.js',
+17 silly publish   scripts: { test: 'echo "Error: no test specified" && exit 1' },
+17 silly publish   keywords: [ 'document', 'proxy', 'watcher', 'auto', 'refresh', 'changed' ],
+17 silly publish   author: { name: 'Rui Azevedo' },
+17 silly publish   license: 'MIT',
+17 silly publish   repository:
+17 silly publish    { type: 'git',
+17 silly publish      url: 'git+https://github.com/neu-rah/lazy-docs.git' },
+17 silly publish   engines: { node: '>=4.2.2' },
+17 silly publish   dependencies: { expect: '>=1.13.0', path: '>=0.12.7' },
+17 silly publish   readme: '####lazy-docs####\nFunctional documents for node\n\nfunctional documents (a function that returns a document) combines watching changes, document parsing and proxy.\n\ndocuments only reload if changed and when requested, external changes only flag the file to refresh at next request.\n\n###usage###\n\nmodule only exports a setup function\n>require("lazy-docs")([*loader function*]);\n**where**\n*loader function* is optional (default to text load) is a function to parse the document from a string.\n\nThis will return document loader function to load document defaulting to the given format loader\n\nloader function expects 1 or two arguments:\n\n>require("lazy-docs")()(*filename*,[*loader function*])\n\n**where**\n*filename* is a file name string\n*loader function* is an optional alternative to the default\n\nThe loader function will return a functional document.\nYou can associate it with a variable or call it directly\n\n>var myfile=require("lazy-docs")()("myfile.txt");\n\nthen the file can be recalled and will update himself\nex:\n```javascript\nconsole.log(myfile());//will print updated file\n```\n**text documents loader**\n```javascript\ntxtDocs=require(\'lazy-docs\')();\nvar txtDoc=docs.open("data/test.txt");\nvar xmlDoc=docs.open("data/test.xml",libxml.parseXml);//with alternative format\nconsole.log(txtDoc());\n```\n**libxmljs documents loader**\n```javascript\nxmlDocs=require(\'lazy-docs\')(libxml.parseXmlString);\nvar xmlDoc=docs.open("data/test.xml");\nconsole.log(xmlDoc().toString());\n```\n**one liner document request**\n```javascript\nconsole.log(require("lazy-docs")()("myfile.txt")());\n```\n**closing a document**\nstops watching the file, thats really all it does, if you recall the document it will load and watch again\n```javascript\nvar ctrl=require("lazy-docs")()("myfile.txt");\nconsole.log(ctrl());//print updated fileName\nctrl.close();//stop watching the file\n```\n**TODO LIST:**\n\n- add some assync\n- add more sources (http:,sql:,etc..)\n- optional callback onchange (doesn\'t OS optimize multi watchers?)\n',
+17 silly publish   readmeFilename: 'README.md',
+17 silly publish   gitHead: '9a80470b8e629a73bc229966ae5c7c73c4faaf77',
+17 silly publish   bugs: { url: 'https://github.com/neu-rah/lazy-docs/issues' },
+17 silly publish   homepage: 'https://github.com/neu-rah/lazy-docs#readme',
+17 silly publish   _id: 'lazy-docs@0.1.0',
+17 silly publish   _shasum: 'fea0b3a994c7d6997fed42e4c92713b45bb85efd',
+17 silly publish   _from: '.' }
+18 verbose getPublishConfig undefined
+19 silly mapToRegistry name lazy-docs
+20 silly mapToRegistry using default registry
+21 silly mapToRegistry registry https://registry.npmjs.org/
+22 silly mapToRegistry uri https://registry.npmjs.org/lazy-docs
+23 verbose publish registryBase https://registry.npmjs.org/
+24 silly publish uploading /home/azevedo/.npm/lazy-docs/0.1.0/package.tgz
+25 verbose request uri https://registry.npmjs.org/lazy-docs
+26 verbose request sending authorization for write operation
+27 info attempt registry request try #1 at 17:19:29
+28 verbose request using bearer token for auth
+29 verbose request id b4574499c2bf791f
+30 http request PUT https://registry.npmjs.org/lazy-docs
+31 http 403 https://registry.npmjs.org/lazy-docs
+32 verbose headers { 'content-type': 'application/json',
+32 verbose headers   'cache-control': 'max-age=60',
+32 verbose headers   'content-length': '95',
+32 verbose headers   'accept-ranges': 'bytes',
+32 verbose headers   date: 'Sat, 14 Nov 2015 18:19:31 GMT',
+32 verbose headers   via: '1.1 varnish',
+32 verbose headers   connection: 'keep-alive',
+32 verbose headers   'x-served-by': 'cache-lhr6330-LHR',
+32 verbose headers   'x-cache': 'MISS',
+32 verbose headers   'x-cache-hits': '0',
+32 verbose headers   'x-timer': 'S1447525170.271919,VS0,VE1195' }
+33 verbose request invalidating /home/azevedo/.npm/registry.npmjs.org/lazy-docs on PUT
+34 error publish Failed PUT 403
+35 verbose stack Error: "You cannot publish over the previously published version 0.1.0." : lazy-docs
+35 verbose stack     at makeError (/usr/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:264:12)
+35 verbose stack     at CachingRegistryClient.<anonymous> (/usr/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:252:14)
+35 verbose stack     at Request._callback (/usr/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:172:14)
+35 verbose stack     at Request.self.callback (/usr/lib/node_modules/npm/node_modules/request/request.js:198:22)
+35 verbose stack     at emitTwo (events.js:87:13)
+35 verbose stack     at Request.emit (events.js:172:7)
+35 verbose stack     at Request.<anonymous> (/usr/lib/node_modules/npm/node_modules/request/request.js:1063:14)
+35 verbose stack     at emitOne (events.js:82:20)
+35 verbose stack     at Request.emit (events.js:169:7)
+35 verbose stack     at IncomingMessage.<anonymous> (/usr/lib/node_modules/npm/node_modules/request/request.js:1009:12)
+36 verbose statusCode 403
+37 verbose pkgid lazy-docs
+38 verbose cwd /home/azevedo/code/nodes/lazy-docs
+39 error Linux 3.16.0-41-generic
+40 error argv "/usr/bin/nodejs" "/usr/bin/npm" "publish"
+41 error node v4.2.2
+42 error npm  v2.14.7
+43 error code E403
+44 error "You cannot publish over the previously published version 0.1.0." : lazy-docs
+45 error If you need help, you may report this error at:
+45 error     <https://github.com/npm/npm/issues>
+46 verbose exit [ 1, true ]
