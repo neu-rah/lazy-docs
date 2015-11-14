@@ -1,6 +1,6 @@
 {
   "name": "lazy-docs",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Lazy document proxy with watcher",
   "main": "lazy-docs.js",
   "scripts": {

@@ -8,18 +8,23 @@ documents only reload if changed and when requested, external changes only flag 
 ###usage###
 
 module only exports a setup function
+
 >require("lazy-docs")([*loader function*]);
+
 **where**
+
 *loader function* is optional (default to text load) is a function to parse the document from a string.
 
-This will return document loader function to load document defaulting to the given format loader
+This will return a document loader function to load documents defaulting to the given format loader.
 
-loader function expects 1 or two arguments:
+loader function expects one or two arguments:
 
 >require("lazy-docs")()(*filename*,[*loader function*])
 
 **where**
+
 *filename* is a file name string
+
 *loader function* is an optional alternative to the default
 
 The loader function will return a functional document.
@@ -59,5 +64,5 @@ ctrl.close();//stop watching the file
 **TODO LIST:**
 
 - add some assync
-- add more sources (http:,sql:,etc..)
+- add more sources (http:,sql:,etc..) (do a register thing)
 - optional callback onchange (doesn't OS optimize multi watchers?)
