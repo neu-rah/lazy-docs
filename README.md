@@ -1,6 +1,5 @@
 ####lazy-docs####
 Functional documents for node
-**Lazy document proxy with watcher**
 
 functional documents (a function that returns a document) combines watching changes, document parsing and proxy.
 
@@ -51,7 +50,7 @@ console.log(xmlDoc().toString());
 console.log(require("lazy-docs")()("myfile.txt")());
 ```
 **closing a document**
-stops watching the file, thats really all it does, i you recall the document it will load and watch again
+stops watching the file, thats really all it does, if you recall the document it will load and watch again
 ```javascript
 var ctrl=require("lazy-docs")()("myfile.txt");
 console.log(ctrl());//print updated fileName
