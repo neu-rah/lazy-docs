@@ -1,4 +1,5 @@
-#### lazy-docs ####
+lazy-docs
+=========
 
 **functional documents for node.**
 
