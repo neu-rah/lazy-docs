@@ -34,14 +34,15 @@ module.exports=(()=>{
 
     return (url,src)=>{
       if (!url) return;
-      return ()=> {
+      var absFile=url;
+      var r= ()=> {
         if (url.startsWith("mem://")) {
           urls[url].fileName=url;
           return urls[url].doc=typeof src==="string"?fromString(src):src;
         }
         if (url.startsWith("file://")) url=url.substr(7);
 
-        var absFile=path.resolve(process.cwd(), url);
+        absFile=path.resolve(process.cwd(), url);
         if (urls[absFile]) {
           log("serving from pool");
           if(urls[absFile].needRefresh) {
@@ -52,7 +53,6 @@ module.exports=(()=>{
         var tmp=urls[absFile]={};
         tmp.docLoader=src?src:fromString;
         log("parsing file",url);
-        tmp.doc=tmp.docLoader(fs.readFileSync(url).toString());;
         tmp.needRefresh=false;
         //tmp.needSave=false;
         tmp.fileName=absFile;
@@ -65,8 +65,17 @@ module.exports=(()=>{
             default: console.log("File event",event,absFile);
           }*/
         });
-        return tmp.doc;
+        return tmp.doc=tmp.docLoader(fs.readFileSync(url).toString());;
       }
+      r.close=()=>{
+        //var absFile=path.resolve(process.cwd(), url);
+        if (urls[absFile]) {
+          log("closing file",absFile);
+          urls[absFile].watcher.close();
+          delete urls[absFile];
+        }
+      }
+      return r;
     }
   }
 })();
