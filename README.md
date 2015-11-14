@@ -1,4 +1,4 @@
-### lazy-docs ###
+#### lazy-docs ####
 
 **functional documents for node.**
 
@@ -35,9 +35,13 @@ You can associate it with a variable or call it directly
 
 then the file can be recalled and will update himself
 ex:
+
 ```javascript
 console.log(myfile());//will print updated file
 ```
+
+###examples###
+
 **text documents loader**
 ```javascript
 txtDocs=require('lazy-docs')();
