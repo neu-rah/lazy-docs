@@ -10,8 +10,8 @@ usage:
     docs=require('lazy-docs')(libxml.parseXmlString);
     xmlDoc=docs.open("data/test.xml");
 *****/
-var DEBUG=module.id==="repl";
-var debug=DEBUG?console:function(){};
+var debug=true;//module.id==="repl";
+var log=debug?console.log:function(){};
 
 var expect = require('expect');
 var fs = require('fs');
@@ -19,19 +19,16 @@ var path=require("path");
 
 if (!String.prototype.startsWith)
   String.prototype.startsWith=function (prefix) {return this.slice(0, prefix.length) == prefix;}
-else expect("oks".startsWith("ok")).to.be(true);
+else expect("oks".startsWith("ok")).toBe(true);
 
 function docPool(fromString) {
-  if (!fromString) {
-    building
-    fromString=function(id) {return id;}
-  }
+  fromString=fromString||function(id) {return id;}
   var urls={};
   this.close=function (url) {
     if (!url) return;
     var absFile=path.resolve(process.cwd(), url);
     if (urls[absFile]) {
-      debug.log("closing file",absFile);
+      log("closing file",absFile);
       urls[absFile].watcher.close();
     }
   }
@@ -44,13 +41,15 @@ function docPool(fromString) {
 
     var absFile=path.resolve(process.cwd(), url);
     if (urls[absFile]) {
+      log("serving from pool");
       if(urls[absFile].needRefresh) {
-        debug.log("refreshing file",absFile);
+        log("refreshing file",absFile);
         urls[absFile].watcher.close();
       } else return urls[absFile];
     }
     var tmp=urls[absFile]={};
     tmp.docLoader=src?src:fromString;
+    log("parsing file",url);
     tmp.doc=tmp.docLoader(fs.readFileSync(url).toString());;
     tmp.needRefresh=false;
     //tmp.needSave=false;
@@ -68,7 +67,7 @@ function docPool(fromString) {
 }
 
 if (module.id="repl") {//debuging with repl inside module [https://github.com/neu-rah/nit]
-  console.log("Debug module lazy-docs loaded into repl env")
+  console.log("Debug module lazy-docs loaded into ["+module.id+"] environment")
   libxml=require('libxmljs');
   docs=new docPool();//function(id){return id;})
 }
