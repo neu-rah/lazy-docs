@@ -1,3 +1,7 @@
+### lazy-docs ###
+
+**functional documents for node.**
+
 functional documents (a function that returns a document) combines watching changes, document parsing and proxy.
 
 documents only reload if changed and when requested, external changes only flag the file to refresh at next request.
