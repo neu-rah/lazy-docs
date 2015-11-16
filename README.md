@@ -52,7 +52,7 @@ console.log(txtDoc());
 ```
 **libxmljs documents loader**
 ```javascript
-xmlDocs=require('lazy-docs')(libxml.parseXmlString);
+xmlDocs=require('lazy-docs')(libxml.parseXml);
 var xmlDoc=docs.open("data/test.xml");
 console.log(xmlDoc().toString());
 ```

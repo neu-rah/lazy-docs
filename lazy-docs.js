@@ -10,22 +10,20 @@ process.stdin.resume();
 var debug=module.id==="repl";
 var log=debug?console.log:function(){};
 
-function exitHandler(options, err) {
+/*function exitHandler(options, err) {
     if (options.cleanup) console.log('clean');
     if (err) console.log(err.stack);
     if (options.exit) process.exit();
 }
 process.on('exit', exitHandler.bind(null,{cleanup:true}));
 process.on('SIGINT', exitHandler.bind(null, {exit:true}));
-process.on('uncaughtException', exitHandler.bind(null, {exit:true}));
+process.on('uncaughtException', exitHandler.bind(null, {exit:true}));*/
 
-var expect = require('expect');
+//var expect = require('expect');
 var fs = require('fs');
 var path=require("path");
 
-if (!String.prototype.startsWith)
-  String.prototype.startsWith=function (prefix) {return this.slice(0, prefix.length) == prefix;}
-else expect("oks".startsWith("ok")).toBe(true);
+function startsWith(str,prefix,i) {return str.substr(i||0, prefix.length) == prefix;}
 
 module.exports=(()=>{
   var urls={};
@@ -36,11 +34,12 @@ module.exports=(()=>{
       if (!url) return;
       var absFile=url;
       var r= ()=> {
-        if (url.startsWith("mem://")) {
+        if (startsWith(url,"mem://")) {
+          urls[url]={};
           urls[url].fileName=url;
           return urls[url].doc=typeof src==="string"?fromString(src):src;
         }
-        if (url.startsWith("file://")) url=url.substr(7);
+        if (startsWith(url,"file://")) url=url.substr(7);
 
         absFile=path.resolve(process.cwd(), url);
         if (urls[absFile]) {
@@ -79,19 +78,6 @@ module.exports=(()=>{
     }
   }
 })();
-
-  /*this.close=function (url) {
-    if (!url) return;
-    var absFile=path.resolve(process.cwd(), url);
-    if (urls[absFile]) {
-      log("closing file",absFile);
-      urls[absFile].watcher.close();
-    }
-  }
-  this.open=function(url,src) {return this.load(url,src).doc;}
-  this.load=function(url,src) {
-  }*/
-
 
 if (debug) {//debuging with repl inside module [https://github.com/neu-rah/nit]
   console.log("Debug module lazy-docs loaded into ["+module.id+"] environment")
