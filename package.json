@@ -23,6 +23,6 @@
   "engines" : { "node" : ">=4.2.2" },
   "dependencies" : {
     "path":">=0.12.7",
-    "node-fproxy":">=1.0.0"
+    "fproxy":">=1.0.0"
   }
 }

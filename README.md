@@ -11,7 +11,7 @@ documents only reload if changed and when requested, external changes only flag 
 
 module only exports a setup function
 
->require("lazy-docs")([*loader function*]);
+>require("lazy-docs")([*loader functio*]);
 
 **where**
 
