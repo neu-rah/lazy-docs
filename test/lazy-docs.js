@@ -15,14 +15,14 @@ describe('lazy-docs', function() {
 
   describe('loader function', function() {
 		it('should return functional file', function() {
-			result=docs("test/resources/text.txt");
+			result=docs("test/resources/test.txt");
 			result.close.should.be.type('function');
 		});
 	});
 
   describe('functional file', function() {
 		it('should load a file on demand and return a document', function() {
-			result=docs("test/resources/text.txt")();
+			result=docs("test/resources/test.txt")();
 			result.should.be.type('string');
 			result.should.match(/my text file\./);
 		});

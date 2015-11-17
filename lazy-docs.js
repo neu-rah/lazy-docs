@@ -9,6 +9,7 @@
 var debug=module.id==="repl";
 var log=debug?console.log:function(){};
 
+var fs=require("fs");
 var path=require("path");
 var fProxy=require("fproxy");
 

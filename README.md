@@ -65,5 +65,7 @@ file.close();//stop watching the file
 **TODO LIST:**
 
 - add some assync
-- add more sources (http:,sql:,etc..) (do a register thing)
-- optional callback onchange (doesn't OS optimize multi watchers?)
+- ~~add more sources (http:,sql:,etc..) (do a register thing)~~
+  now providing a media descriptor on module setup function (on fProxy module)
+- ~~optional callback onchange (doesn't OS optimize multi watchers?)~~
+  current media descriptor cares not about this, however other descriptions can be made.
