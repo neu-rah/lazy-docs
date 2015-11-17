@@ -45,27 +45,22 @@ console.log(myfile());//will print updated file
 
 **text documents loader**
 ```javascript
-txtDocs=require('lazy-docs')();
-var txtDoc=docs.open("data/test.txt");
-var xmlDoc=docs.open("data/test.xml",libxml.parseXml);//with alternative format
-console.log(txtDoc());
+var txtDoc=require('lazy-docs')();
+var txt=txtDoc("test/resources/test.txt");
+console.log(txt());
 ```
 **libxmljs documents loader**
 ```javascript
-xmlDocs=require('lazy-docs')(libxml.parseXml);
-var xmlDoc=docs.open("data/test.xml");
-console.log(xmlDoc().toString());
-```
-**one liner document request**
-```javascript
-console.log(require("lazy-docs")()("myfile.txt")());
+var xmlDoc=require('lazy-docs')(libxml.parseXml);
+var xml=xmlDoc("test/resources/test.xml");
+console.log(xml().toString());
 ```
 **closing a document**
-stops watching the file, thats really all it does, if you recall the document it will load and watch again
+stops watching the file, if you recall the document it will load and watch again
 ```javascript
-var ctrl=require("lazy-docs")()("myfile.txt");
-console.log(ctrl());//print updated fileName
-ctrl.close();//stop watching the file
+var file=require("lazy-docs")()("myfile.txt");
+console.log(file());//print updated fileName
+file.close();//stop watching the file
 ```
 **TODO LIST:**
 
