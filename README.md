@@ -64,7 +64,7 @@ file.close();//stop watching the file
 ```
 **TODO LIST:**
 
-- add some assync
+- ~~add some assync~~ actual media descriptor suports sync or assync operation
 - ~~add more sources (http:,sql:,etc..) (do a register thing)~~
   now providing a media descriptor on module setup function (on fProxy module)
 - ~~optional callback onchange (doesn't OS optimize multi watchers?)~~

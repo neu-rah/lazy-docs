@@ -1,6 +1,6 @@
 {
   "name": "lazy-docs",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Lazy document proxy with watcher",
   "main": "lazy-docs.js",
   "scripts": {
@@ -23,6 +23,7 @@
   "engines" : { "node" : ">=4.2.2" },
   "dependencies" : {
     "path":">=0.12.7",
-    "fproxy":">=1.0.0"
+    "fproxy":">=1.0.0",
+    "node-swear":">=1.0.2"
   }
 }
