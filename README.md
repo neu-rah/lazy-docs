@@ -7,51 +7,59 @@ functional documents (a function that returns a document) combines watching chan
 
 documents only reload if changed and when requested, external changes only flag the file to refresh at next request.
 
-###usage###
+```javascript
+var myfile=require("lazy-docs")()("test/resources/test.txt");
+console.log(myfile());//sync mode
+myfile(o=>console.log("content:",o));//assync mode
+```
 
-module only exports a setup function
 
->require("lazy-docs")([*loader functio*]);
+### usage
+
+this module only exports a setup function, on setup a file creator function is returned.
+The file creator function should be used to create functional files
+
+>require("lazy-docs")([*loader function*]);
 
 **where**
 
-*loader function* is optional (default to text load) is a function to parse the document from a string.
+*loader function* is optional (default to text load) and should be a function to parse the document from a string/buffer.
 
-This will return a document loader function to load documents defaulting to the given format loader.
+This will return a document loader function that expects a filename.
 
-loader function expects one or two arguments:
-
->require("lazy-docs")()(*filename*,[*loader function*])
+>require("lazy-docs")(*parser*)(*filename*)
 
 **where**
 
 *filename* is a file name string
 
-*loader function* is an optional alternative to the default
-
 The loader function will return a functional document.
 You can associate it with a variable or call it directly
 
->var myfile=require("lazy-docs")()("myfile.txt");
-
-then the file can be recalled and will update himself
-ex:
-
 ```javascript
-console.log(myfile());//will print updated file
+var myfile=require("lazy-docs")()("test/resources/test.txt");
 ```
 
-###examples###
+then the file can be recalled and will update himself
+
+```javascript
+console.log(myfile());//sync mode
+myfile(o=>console.log("content:",o));//assync mode
+```
+
+### examples
 
 **text documents loader**
 ```javascript
-var txtDoc=require('lazy-docs')();
-var txt=txtDoc("test/resources/test.txt");
-console.log(txt());
+var txtDoc=require('lazy-docs')();//setup for text format
+var txt=txtDoc("test/resources/test.txt");//functional file
+console.log(txt());//sync file content with cache and watcher
+txt(o=>console.log(o));//assync file content with cache and watcher
 ```
 **libxmljs documents loader**
 ```javascript
-var xmlDoc=require('lazy-docs')(libxml.parseXml);
+var libxml=require('libxmljs');
+var xmlDoc=require('lazy-docs')(libxml.parseXml);//setup for libxml documents
 var xml=xmlDoc("test/resources/test.xml");
 console.log(xml().toString());
 ```
@@ -59,13 +67,15 @@ console.log(xml().toString());
 stops watching the file, if you recall the document it will load and watch again
 ```javascript
 var file=require("lazy-docs")()("myfile.txt");
-console.log(file());//print updated fileName
-file.close();//stop watching the file
+console.log(file());//print updated text file content
+file.proxy.close();//stop watching the file
 ```
 **TODO LIST:**
 
 - ~~add some assync~~ actual media descriptor suports sync or assync operation
 - ~~add more sources (http:,sql:,etc..) (do a register thing)~~
-  now providing a media descriptor on module setup function (on fProxy module)
+  ~~now providing a media descriptor on module setup function (on fProxy module)~~
+  fProxy now supports media descriptors
 - ~~optional callback onchange (doesn't OS optimize multi watchers?)~~
-  current media descriptor cares not about this, however other descriptions can be made.
+  ~~current media descriptor cares not about this, however other descriptions can be made.~~
+  this module defaults to local sync/assync file system, see [fProxy](https://www.npmjs.com/package/fproxy) for more flexibility and ES6 promise returning file reader.
