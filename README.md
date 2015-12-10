@@ -37,10 +37,11 @@ The loader function will return a functional document.
 You can associate it with a variable or call it directly
 
 ```javascript
-var myfile=require("lazy-docs")()("test/resources/test.txt");
+//default parser
+var myfile=require("lazy-docs")(/*use default parser*/)("test/resources/test.txt");
 ```
 
-then the file can be recalled and will update himself
+then the file can be recalled and will update himself in case of external change
 
 ```javascript
 console.log(myfile());//sync mode
@@ -72,10 +73,4 @@ file.proxy.close();//stop watching the file
 ```
 **TODO LIST:**
 
-- ~~add some assync~~ actual media descriptor suports sync or assync operation
-- ~~add more sources (http:,sql:,etc..) (do a register thing)~~
-  ~~now providing a media descriptor on module setup function (on fProxy module)~~
-  fProxy now supports media descriptors
-- ~~optional callback onchange (doesn't OS optimize multi watchers?)~~
-  ~~current media descriptor cares not about this, however other descriptions can be made.~~
-  this module defaults to local sync/assync file system, see [fProxy](https://www.npmjs.com/package/fproxy) for more flexibility and ES6 promise returning file reader.
+this module defaults to local sync/assync file system, see [fProxy](https://www.npmjs.com/package/fproxy) for more flexibility

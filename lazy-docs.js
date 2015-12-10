@@ -13,7 +13,7 @@ var log=debug?console.log:function(){};
 //this module only wraps it and defaults to local file system
 var fProxy=require("fproxy");
 var lazyDocs=module.exports=function lazyDocs(fromString) {
-  return fProxy(fProxy.mediaDescriptors.fs,fromString||(o=>o.toString()));
+  return fProxy(fProxy.mediaDescriptors.file,fromString||(o=>o.toString()));
 }
 
 if (debug) {//debuging with repl inside module [https://github.com/neu-rah/nit]
@@ -24,5 +24,5 @@ if (debug) {//debuging with repl inside module [https://github.com/neu-rah/nit]
   var myTextFile=textFile("test/resources/test.txt");
   myTextFile((e,o)=>log("assync result:",e||o));
   var myXmlFile=xmlFile("test/resources/test.xml");
-  myXmlFile(o=>log("assync xml result:",o.toString()));
+  myXmlFile((e,o)=>log("assync xml result:",e||o.toString()));
 }
