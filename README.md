@@ -10,7 +10,7 @@ documents only reload if changed and when requested, external changes only flag 
 ```javascript
 var myfile=require("lazy-docs")()("test/resources/test.txt");
 console.log(myfile());//sync mode
-myfile(o=>console.log("content:",o));//assync mode
+myfile((e,o)=>console.log("content:",e||o));//assync mode
 ```
 
 
